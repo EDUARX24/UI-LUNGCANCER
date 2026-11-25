@@ -3,7 +3,7 @@ import { ShieldCheck, Activity, Lock } from "lucide-react";
 
 export function AuthLayout() {
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-[#fafafa] flex flex-col justify-between selection:bg-[#a78bfa]/25 selection:text-[#c4b5fd] overflow-hidden">
+    <div className="relative min-h-screen bg-[#09090b] text-[#fafafa] flex flex-col justify-between selection:bg-[#a78bfa]/25 selection:text-[#c4b5fd] overflow-x-hidden">
       {/* Background ambient lighting */}
       <div 
         aria-hidden="true" 
@@ -19,12 +19,12 @@ export function AuthLayout() {
       />
 
       {/* Header bar */}
-      <header className="relative z-10 w-full px-6 py-4 flex items-center justify-between border-b border-[#27272a]/40 bg-[#09090b]/60 backdrop-blur-md">
-        <Link to="/login" className="flex items-center gap-3 group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a78bfa]">
-          <div className="h-9 w-9 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a78bfa] shadow-sm group-hover:border-[#a78bfa]/50 transition-colors">
+      <header className="relative z-10 w-full px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3 border-b border-[#27272a]/40 bg-[#09090b]/60 backdrop-blur-md">
+        <Link to="/login" className="flex items-center gap-3 group min-w-0 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#a78bfa]">
+          <div className="h-9 w-9 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a78bfa] shadow-sm group-hover:border-[#a78bfa]/50 transition-colors shrink-0">
             <Activity className="w-5 h-5 transition-transform group-hover:scale-105" />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-sm tracking-tight text-[#fafafa]">
                 PulmoScan <span className="text-[#a78bfa]">AI</span>
@@ -33,13 +33,13 @@ export function AuthLayout() {
                 v2.4
               </span>
             </div>
-            <span className="text-[10px] text-[#71717a] font-mono">
+            <span className="text-[10px] text-[#71717a] font-mono truncate">
               Plataforma de Segmentación Pulmonar TC
             </span>
           </div>
         </Link>
 
-        <div className="hidden sm:flex items-center gap-3 text-xs font-mono">
+        <div className="hidden sm:flex items-center gap-3 text-xs font-mono shrink-0">
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#121215] border border-[#27272a] text-[#a1a1aa]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse" />
             <span className="text-[11px]">PACS Online</span>
@@ -57,15 +57,15 @@ export function AuthLayout() {
       </main>
 
       {/* Global Clinical Compliance Footer */}
-      <footer className="relative z-10 w-full py-4 px-6 border-t border-[#27272a]/40 bg-[#09090b]/80 backdrop-blur-md">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#71717a]">
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#34d399]" />
+      <footer className="relative z-10 w-full py-4 px-4 sm:px-6 border-t border-[#27272a]/40 bg-[#09090b]/80 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3 text-[11px] text-[#71717a] text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#34d399] shrink-0" />
             <span className="font-mono uppercase tracking-wider text-[10px] text-[#a1a1aa]">
               Entorno Clínico Certificado · RGPD / HIPAA Nivel 4
             </span>
           </div>
-          <div className="flex items-center gap-4 text-[11px] font-mono">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] font-mono">
             <span>TC-DICOM Estación IA</span>
             <span className="text-[#3f3f46]">·</span>
             <span className="text-[#a1a1aa]">Render API: Conectada</span>

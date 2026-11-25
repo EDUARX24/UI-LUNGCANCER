@@ -124,7 +124,7 @@ export function ResetPasswordPage({ onSubmitMock }: ResetPasswordPageProps) {
 
   return (
     <div className="w-full max-w-lg mx-auto flex flex-col items-center">
-      <div className="w-full bg-[#121215] border border-[#27272a]/70 rounded-2xl shadow-2xl shadow-black/80 p-6 sm:p-8 relative overflow-hidden backdrop-blur-xl">
+      <div className="w-full bg-[#121215] border border-[#27272a]/70 rounded-2xl shadow-2xl shadow-black/80 p-5 sm:p-8 relative overflow-hidden backdrop-blur-xl">
         {/* Subtle decorative glow */}
         <div 
           aria-hidden="true" 
@@ -132,16 +132,16 @@ export function ResetPasswordPage({ onSubmitMock }: ResetPasswordPageProps) {
         />
 
         {/* Header Section */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-[#18181b] border border-[#27272a] text-[#a78bfa] shadow-inner">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-[#18181b] border border-[#27272a] text-[#a78bfa] shadow-inner shrink-0">
               <KeyRound className="w-6 h-6" />
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a78bfa] opacity-75" />
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-[#a78bfa]" />
               </span>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <span className="text-[11px] font-mono tracking-widest text-[#a78bfa] font-semibold uppercase">
                   PulmoScan
@@ -152,18 +152,18 @@ export function ResetPasswordPage({ onSubmitMock }: ResetPasswordPageProps) {
                 </span>
               </div>
               <p className="text-xs text-[#a1a1aa] mt-0.5 flex items-center gap-1">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399]" />
-                Terminal Clínico Verificado
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#34d399] shrink-0" />
+                <span className="truncate">Terminal Clínico Verificado</span>
               </p>
             </div>
           </div>
-          <span className="hidden sm:inline-flex text-[10px] font-mono text-[#34d399] px-2 py-1 rounded bg-[#18181b] border border-[#27272a]">
+          <span className="hidden sm:inline-flex text-[10px] font-mono text-[#34d399] px-2 py-1 rounded bg-[#18181b] border border-[#27272a] shrink-0">
             TLS 1.3 ENC
           </span>
         </div>
 
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-[#fafafa] tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-[#fafafa] tracking-tight">
             Establecer nueva contraseña
           </h1>
           <p className="text-xs text-[#a1a1aa] mt-1 leading-relaxed">
@@ -234,7 +234,7 @@ export function ResetPasswordPage({ onSubmitMock }: ResetPasswordPageProps) {
 
             {/* Field 1: New Password */}
             <div className="space-y-1.5 text-left">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-wrap justify-between items-center gap-1">
                 <label 
                   htmlFor="password" 
                   className="text-xs font-medium text-[#fafafa] uppercase tracking-wider font-mono block"
@@ -295,7 +295,7 @@ export function ResetPasswordPage({ onSubmitMock }: ResetPasswordPageProps) {
 
             {/* Field 2: Confirm Password */}
             <div className="space-y-1.5 text-left">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-wrap justify-between items-center gap-1">
                 <label 
                   htmlFor="confirmPassword" 
                   className="text-xs font-medium text-[#fafafa] uppercase tracking-wider font-mono block"
@@ -344,7 +344,7 @@ export function ResetPasswordPage({ onSubmitMock }: ResetPasswordPageProps) {
 
             {/* Checklist of rules */}
             <div className="bg-[#0f0f12] p-3.5 rounded-xl border border-[#27272a]/60 space-y-2 mt-4 text-left">
-              <div className="text-[11px] font-mono font-medium text-[#a1a1aa] uppercase tracking-wider flex items-center justify-between">
+              <div className="text-[11px] font-mono font-medium text-[#a1a1aa] uppercase tracking-wider flex flex-wrap items-center justify-between gap-1">
                 <span>Parámetros Criptográficos</span>
                 <span className="text-[10px] text-[#71717a]">{rules.count}/4 Cumplidos</span>
               </div>
@@ -400,9 +400,9 @@ export function ResetPasswordPage({ onSubmitMock }: ResetPasswordPageProps) {
         )}
 
         {/* Security Status Badges Inside Card */}
-        <div className="mt-6 pt-4 bg-[#18181b]/50 -mx-6 -mb-6 sm:-mx-8 sm:-mb-8 px-6 py-3.5 flex items-center justify-between text-[11px] text-[#a1a1aa] border-t border-[#27272a]/40">
+        <div className="mt-6 pt-4 bg-[#18181b]/50 -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 px-5 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#a1a1aa] border-t border-[#27272a]/40">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#34d399] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#34d399] animate-pulse shrink-0" />
             <span className="font-mono text-[11px]">Nodo DICOM PACS · Conectado</span>
           </div>
           <span className="text-[10px] px-2 py-0.5 rounded bg-[#27272a] text-[#a1a1aa] font-mono">

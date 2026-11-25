@@ -111,16 +111,16 @@ export function ActivateAccountPage({ onSubmitMock }: ActivateAccountPageProps) 
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto flex flex-col gap-6 py-4">
+    <div className="w-full max-w-5xl mx-auto flex flex-col gap-5 sm:gap-6 py-2 sm:py-4">
       {/* Top IAM Breadcrumbs */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-[#121215] border border-[#27272a] px-5 py-2.5 rounded-xl">
-        <div className="flex items-center gap-2 text-xs font-mono">
-          <ShieldCheck className="w-4 h-4 text-[#a78bfa]" />
+      <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 bg-[#121215] border border-[#27272a] px-4 sm:px-5 py-2.5 rounded-xl">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-xs font-mono min-w-0">
+          <ShieldCheck className="w-4 h-4 text-[#a78bfa] shrink-0" />
           <span className="text-[#a78bfa] font-semibold uppercase">SERVICIOS CENTRALES IAM // SIS-HOSP-09</span>
-          <span className="text-[#52525b]">/</span>
+          <span className="text-[#52525b] hidden sm:inline">/</span>
           <span className="text-[#a1a1aa]">POLÍTICA DE IDENTIDAD ENTORNO CRÍTICO</span>
         </div>
-        <div className="flex items-center gap-2 text-xs font-mono">
+        <div className="flex items-center gap-2 text-[11px] sm:text-xs font-mono shrink-0">
           <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse" />
           <span className="text-[#34d399]">ENCLAVE SINCRO: ACTIVO</span>
           <span className="px-2 py-0.5 rounded bg-[#18181b] text-[#a1a1aa] border border-[#27272a]">
@@ -132,21 +132,21 @@ export function ActivateAccountPage({ onSubmitMock }: ActivateAccountPageProps) 
       {/* Main Grid: Form (left) + Tactical Context (right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Col: Form Area */}
-        <div className="lg:col-span-8 flex flex-col gap-5">
-          <div className="bg-[#121215] border border-[#27272a]/80 p-6 sm:p-8 rounded-2xl relative overflow-hidden shadow-xl backdrop-blur-xl">
+        <div className="lg:col-span-8 flex flex-col gap-5 min-w-0">
+          <div className="bg-[#121215] border border-[#27272a]/80 p-5 sm:p-8 rounded-2xl relative overflow-hidden shadow-xl backdrop-blur-xl">
             <div 
               aria-hidden="true" 
               className="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-[#a78bfa]/10 blur-2xl pointer-events-none" 
             />
 
             <div className="relative z-10 flex flex-col gap-1.5 mb-6">
-              <div className="flex items-center gap-2 text-xs font-mono text-[#a78bfa]">
+              <div className="flex flex-wrap items-center gap-2 text-[11px] sm:text-xs font-mono text-[#a78bfa]">
                 <span>MÓDULO DE GESTIÓN DE ACCESOS CRÍTICOS</span>
                 <span className="px-1.5 py-0.5 rounded bg-[#a78bfa]/15 text-[10px] text-[#c4b5fd]">
                   DICOM 3.0 / HIPAA READY
                 </span>
               </div>
-              <h1 className="text-2xl font-bold text-[#fafafa] tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-bold text-[#fafafa] tracking-tight">
                 Activación y Desbloqueo de Credencial Clínica
               </h1>
               <p className="text-xs text-[#a1a1aa] leading-relaxed">
@@ -195,7 +195,7 @@ export function ActivateAccountPage({ onSubmitMock }: ActivateAccountPageProps) 
               <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
                 {/* Step 1: Token */}
                 <div className="space-y-1.5 text-left">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between gap-1">
                     <label htmlFor="token" className="text-xs font-medium text-[#fafafa] tracking-wide block">
                       Código de Asignación Hospitalaria o Token
                     </label>
@@ -294,7 +294,7 @@ export function ActivateAccountPage({ onSubmitMock }: ActivateAccountPageProps) 
 
                 {/* Policy Checklist */}
                 <div className="bg-[#0f0f12] p-4 rounded-xl border border-[#27272a] space-y-2 text-left">
-                  <div className="flex items-center justify-between text-[11px] font-mono text-[#a1a1aa] uppercase">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono text-[#a1a1aa] uppercase">
                     <span>Matriz de Seguridad Hospitalaria (ENS / Argon2id)</span>
                     <span className="text-[#71717a]">{rules.count}/5 Requisitos</span>
                   </div>
@@ -323,10 +323,10 @@ export function ActivateAccountPage({ onSubmitMock }: ActivateAccountPageProps) 
                 </div>
 
                 {/* Actions */}
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <div className="pt-2 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3">
                   <Link
                     to="/login"
-                    className="text-xs font-mono text-[#a1a1aa] hover:text-[#fafafa] transition-colors"
+                    className="text-xs font-mono text-[#a1a1aa] hover:text-[#fafafa] transition-colors text-center sm:text-left"
                   >
                     ¿Ya tienes credencial activa? Inicia sesión
                   </Link>
@@ -371,7 +371,7 @@ export function ActivateAccountPage({ onSubmitMock }: ActivateAccountPageProps) 
             <p className="text-xs text-[#a1a1aa] leading-relaxed mb-3">
               En caso de bloqueo o guardia urgente de tórax, contacte a la Centralita IAM (Ext. 4402).
             </p>
-            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+            <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-2 text-xs font-mono">
               <div className="p-2 rounded bg-[#121215] border border-[#27272a]">
                 <span className="text-[10px] text-[#71717a] block">Ext. Prioritaria</span>
                 <span className="text-sm font-bold text-[#a78bfa]">4402</span>

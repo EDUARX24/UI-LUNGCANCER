@@ -1,6 +1,8 @@
 import { apiClient, setAuthTokens } from "@/lib/api/client";
 import type {
   AuthTokens,
+  AuthSessionItem,
+  AuthSessionsResponse,
   CSRFTokenResponse,
   UserProfile,
   MeResponse,
@@ -140,11 +142,38 @@ export const authService = {
   },
 
   /**
+   * Lists active and historical sessions for the authenticated user
+   * GET /api/v1/auth/sessions
+   */
+  async listSessions(): Promise<AuthSessionItem[]> {
+    const response = await apiClient.get<AuthSessionsResponse>("/auth/sessions");
+    return response.data.data;
+  },
+
+  /**
+   * Revokes a specific session owned by the authenticated user
+   * DELETE /api/v1/auth/sessions/{session_id}
+   */
+  async revokeSession(sessionId: string): Promise<SuccessResponse> {
+    const response = await apiClient.delete<SuccessResponse>(`/auth/sessions/${sessionId}`);
+    return response.data;
+  },
+
+  /**
    * Diagnoses backend service health
    * GET /api/v1/health
    */
   async checkHealth(): Promise<HealthResponse> {
     const response = await apiClient.get<HealthResponse>("/health");
+    return response.data;
+  },
+
+  /**
+   * Verifies backend PostgreSQL readiness
+   * GET /api/v1/ready
+   */
+  async checkReadiness(): Promise<HealthResponse> {
+    const response = await apiClient.get<HealthResponse>("/ready");
     return response.data;
   },
 };

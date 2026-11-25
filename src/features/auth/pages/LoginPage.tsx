@@ -84,7 +84,7 @@ export function LoginPage({ onSuccess, onSubmitMock }: LoginPageProps) {
   return (
     <div className="w-full max-w-md mx-auto flex flex-col items-center">
       {/* Card Container */}
-      <div className="w-full bg-[#121215] border border-[#27272a]/70 rounded-2xl shadow-2xl shadow-black/80 p-6 sm:p-8 relative overflow-hidden backdrop-blur-xl">
+      <div className="w-full bg-[#121215] border border-[#27272a]/70 rounded-2xl shadow-2xl shadow-black/80 p-5 sm:p-8 relative overflow-hidden backdrop-blur-xl">
         {/* Subtle decorative glow */}
         <div 
           aria-hidden="true" 
@@ -100,7 +100,7 @@ export function LoginPage({ onSuccess, onSubmitMock }: LoginPageProps) {
           <div className="h-12 w-12 rounded-xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a78bfa] shadow-inner mb-3 transition-transform duration-300 hover:scale-105">
             <Activity className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-[#fafafa]">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#fafafa]">
             Iniciar Sesión
           </h1>
           <p className="text-xs text-[#a1a1aa] max-w-xs mt-1.5 leading-relaxed">
@@ -150,7 +150,7 @@ export function LoginPage({ onSuccess, onSubmitMock }: LoginPageProps) {
 
           {/* Password field */}
           <div className="space-y-1.5 text-left">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-1">
               <label 
                 htmlFor="password" 
                 className="text-xs font-medium text-[#fafafa] tracking-wide block"
@@ -240,9 +240,9 @@ export function LoginPage({ onSuccess, onSubmitMock }: LoginPageProps) {
         </div>
 
         {/* PACS Node Status in Card Footer */}
-        <div className="mt-6 pt-4 bg-[#18181b]/50 -mx-6 -mb-6 sm:-mx-8 sm:-mb-8 px-6 py-3.5 flex items-center justify-between text-[11px] text-[#a1a1aa] border-t border-[#27272a]/40">
+        <div className="mt-6 pt-4 bg-[#18181b]/50 -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 px-5 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#a1a1aa] border-t border-[#27272a]/40">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#34d399] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#34d399] animate-pulse shrink-0" />
             <span className="font-mono text-[11px]">Nodo DICOM PACS · Conectado</span>
           </div>
           <div className="flex items-center gap-1 font-mono text-[10px] text-[#71717a]">

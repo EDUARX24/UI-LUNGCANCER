@@ -37,15 +37,15 @@ export function AdminDashboardPage() {
   };
 
   return (
-    <div className="flex flex-col w-full gap-8">
+    <div className="flex flex-col w-full gap-6 lg:gap-8">
       {/* Top Command & Action Bar */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-2">
-        <div className="flex flex-col gap-1.5">
-          <div className="flex items-center gap-3">
-            <h1 className="text-xl font-semibold tracking-tight text-[#fafafa]">
+        <div className="flex flex-col gap-1.5 min-w-0">
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+            <h1 className="text-lg sm:text-xl font-semibold tracking-tight text-[#fafafa]">
               Panel de Control de Administración Clínica
             </h1>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-[#18181b] border border-[#27272a] text-[#34d399]">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-[#18181b] border border-[#27272a] text-[#34d399] shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34d399] animate-pulse" />
               ENLACE DICOM ACTIVO
             </span>
@@ -57,13 +57,13 @@ export function AdminDashboardPage() {
         </div>
 
         {/* Quick Action Buttons */}
-        <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5 w-full lg:w-auto">
           <button
             type="button"
             onClick={() => setIsInviteDialogOpen(true)}
-            className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-lg bg-[#121215] hover:bg-[#18181b] border border-[#27272a] text-[#fafafa] transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium rounded-lg bg-[#121215] hover:bg-[#18181b] border border-[#27272a] text-[#fafafa] transition-colors"
           >
-            <UserPlus className="w-4 h-4 text-[#a78bfa]" />
+            <UserPlus className="w-4 h-4 text-[#a78bfa] shrink-0" />
             <span>+ Invitar Facultativo</span>
           </button>
 
@@ -71,10 +71,10 @@ export function AdminDashboardPage() {
             type="button"
             onClick={handleRestartInference}
             disabled={isRestartingInference}
-            className="inline-flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-lg bg-[#121215] hover:bg-[#18181b] border border-[#27272a] text-[#fafafa] transition-colors disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium rounded-lg bg-[#121215] hover:bg-[#18181b] border border-[#27272a] text-[#fafafa] transition-colors disabled:opacity-50"
           >
             <RotateCw
-              className={`w-4 h-4 text-[#a1a1aa] ${
+              className={`w-4 h-4 text-[#a1a1aa] shrink-0 ${
                 isRestartingInference ? "animate-spin text-[#a78bfa]" : ""
               }`}
             />
@@ -84,9 +84,9 @@ export function AdminDashboardPage() {
           <button
             type="button"
             onClick={handleExportAudit}
-            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] transition-colors shadow-sm"
+            className="inline-flex items-center justify-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] transition-colors shadow-sm"
           >
-            <FileDown className="w-4 h-4" />
+            <FileDown className="w-4 h-4 shrink-0" />
             <span>Exportar Informe de Auditoría</span>
           </button>
         </div>
@@ -140,7 +140,7 @@ export function AdminDashboardPage() {
               <Layers className="w-4 h-4" />
             </div>
           </div>
-          <div className="flex items-center justify-between pt-2 bg-[#09090b]/60 -mx-5 -mb-5 p-4 rounded-b-xl border-t border-[#18181b] text-[11px] font-mono">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 bg-[#09090b]/60 -mx-5 -mb-5 p-4 rounded-b-xl border-t border-[#18181b] text-[11px] font-mono">
             <span className="text-[#ef4444] flex items-center gap-1 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ef4444]" />
               48 Malignidad &gt;65%
@@ -167,7 +167,7 @@ export function AdminDashboardPage() {
               <Radio className="w-4 h-4" />
             </div>
           </div>
-          <div className="flex items-center justify-between pt-2 bg-[#09090b]/60 -mx-5 -mb-5 p-4 rounded-b-xl border-t border-[#18181b] text-[11px] font-mono">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 bg-[#09090b]/60 -mx-5 -mb-5 p-4 rounded-b-xl border-t border-[#18181b] text-[11px] font-mono">
             <span className="inline-flex items-center gap-1.5 text-[#a1a1aa]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34d399]" /> 4 Nodos sincronizados
             </span>
@@ -191,7 +191,7 @@ export function AdminDashboardPage() {
               <Cpu className="w-4 h-4" />
             </div>
           </div>
-          <div className="flex items-center justify-between pt-2 bg-[#09090b]/60 -mx-5 -mb-5 p-4 rounded-b-xl border-t border-[#18181b] text-[11px] font-mono">
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 bg-[#09090b]/60 -mx-5 -mb-5 p-4 rounded-b-xl border-t border-[#18181b] text-[11px] font-mono">
             <span className="text-[#a1a1aa]">Temp 54°C · Normal</span>
             <span className="px-2 py-0.5 rounded bg-[#18181b] border border-[#27272a] text-[#34d399] text-[10px]">
               8 workers activos
@@ -203,13 +203,13 @@ export function AdminDashboardPage() {
       {/* Main Operational Grid (70% Left / 30% Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 items-start">
         {/* Left Column (70%) */}
-        <div className="lg:col-span-7 flex flex-col gap-6">
+        <div className="lg:col-span-7 flex flex-col gap-6 min-w-0">
           <InferencePerformanceChart />
           <StudiesQueueTable />
         </div>
 
         {/* Right Column (30%) */}
-        <div className="lg:col-span-3 flex flex-col gap-6">
+        <div className="lg:col-span-3 flex flex-col gap-6 min-w-0">
           <InfrastructureStatusCard />
           <AuditStreamCard />
         </div>

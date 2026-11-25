@@ -9,6 +9,10 @@ import { ActivateAccountPage } from "@/features/auth/pages/ActivateAccountPage";
 import { SessionPage } from "@/features/auth/pages/SessionPage";
 import { ForbiddenPage } from "@/features/auth/pages/ForbiddenPage";
 import { AdminDashboardPage } from "@/features/admin/pages/AdminDashboardPage";
+import { UsersDirectoryPage } from "@/features/admin/pages/UsersDirectoryPage";
+import { UserDetailPage } from "@/features/admin/pages/UserDetailPage";
+import { RolesPermissionsPage } from "@/features/admin/pages/RolesPermissionsPage";
+import { AuditEventsPage } from "@/features/admin/pages/AuditEventsPage";
 import { PatientStudiesPage } from "@/features/patient/pages/PatientStudiesPage";
 import { RootRedirect } from "./RootRedirect";
 import { ProtectedRoute } from "@/features/auth/components/ProtectedRoute";
@@ -31,6 +35,38 @@ export const router = createBrowserRouter([
             element: (
               <ProtectedRoute requiredRoles={["ADMIN", "RADIOLOGIST"]}>
                 <AdminDashboardPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "admin/users",
+            element: (
+              <ProtectedRoute requiredRoles={["ADMIN"]}>
+                <UsersDirectoryPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "admin/users/:userId",
+            element: (
+              <ProtectedRoute requiredRoles={["ADMIN"]}>
+                <UserDetailPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "admin/roles",
+            element: (
+              <ProtectedRoute requiredRoles={["ADMIN"]}>
+                <RolesPermissionsPage />
+              </ProtectedRoute>
+            ),
+          },
+          {
+            path: "admin/audit",
+            element: (
+              <ProtectedRoute requiredRoles={["ADMIN"]}>
+                <AuditEventsPage />
               </ProtectedRoute>
             ),
           },

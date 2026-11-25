@@ -1,19 +1,21 @@
 import { History, CheckCircle2 } from "lucide-react";
-import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export function AuditStreamCard() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="p-5 rounded-xl bg-[#0c0c0f] border border-[#27272a] flex flex-col gap-4 shadow-sm">
+      <div className="p-4 sm:p-5 rounded-xl bg-[#0c0c0f] border border-[#27272a] flex flex-col gap-4 shadow-sm">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <History className="w-4 h-4 text-[#a78bfa]" />
-            <h3 className="text-xs font-semibold tracking-tight text-[#fafafa] uppercase font-mono">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <History className="w-4 h-4 text-[#a78bfa] shrink-0" />
+            <h3 className="text-xs font-semibold tracking-tight text-[#fafafa] uppercase font-mono truncate">
               Registro Clínico & Alertas
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-[#71717a]">Stream live</span>
+          <span className="text-[10px] font-mono text-[#71717a] shrink-0">Stream live</span>
         </div>
 
         {/* Timeline Events */}
@@ -80,7 +82,7 @@ export function AuditStreamCard() {
         {/* Action Button */}
         <button
           type="button"
-          onClick={() => toast.info("Exportando registro completo de auditoría y trazas HIPAA...")}
+          onClick={() => navigate("/admin/audit")}
           className="w-full py-2 text-center text-xs text-[#a1a1aa] hover:text-[#fafafa] bg-[#09090b] rounded-lg hover:bg-[#18181b] border border-[#27272a] transition-colors font-mono"
         >
           Ver Log Completo de Seguridad
@@ -88,8 +90,8 @@ export function AuditStreamCard() {
       </div>
 
       {/* C-ECHO Diagnostic Sweep Banner */}
-      <div className="p-4 rounded-xl bg-[#0c0c0f] border-l-2 border-[#a78bfa] border border-y-[#27272a] border-r-[#27272a] flex items-center justify-between">
-        <div className="flex flex-col">
+      <div className="p-4 rounded-xl bg-[#0c0c0f] border-l-2 border-[#a78bfa] border border-y-[#27272a] border-r-[#27272a] flex items-center justify-between gap-3">
+        <div className="flex flex-col min-w-0">
           <span className="text-[11px] font-mono text-[#fafafa] font-semibold">
             C-ECHO Diagnostic Sweep
           </span>
@@ -97,7 +99,7 @@ export function AuditStreamCard() {
             Todos los 4 Nodos DICOM respondieron en &lt;20ms
           </span>
         </div>
-        <CheckCircle2 className="w-4 h-4 text-[#34d399]" />
+        <CheckCircle2 className="w-4 h-4 text-[#34d399] shrink-0" />
       </div>
     </div>
   );

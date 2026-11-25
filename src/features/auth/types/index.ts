@@ -70,3 +70,19 @@ export interface ApiErrorDetail {
 export interface ApiErrorResponse {
   error: ApiErrorDetail;
 }
+
+export interface AuthSessionItem {
+  id: string;
+  created_at: string;
+  expires_at: string;
+  revoked_at: string | null;
+  last_used_at: string | null;
+  ip_address: string | null;
+  user_agent: string | null;
+  is_current: boolean;
+}
+
+export interface AuthSessionsResponse {
+  data: AuthSessionItem[];
+  message: string;
+}

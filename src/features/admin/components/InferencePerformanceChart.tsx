@@ -5,11 +5,11 @@ export function InferencePerformanceChart() {
   const [range, setRange] = useState<"today" | "7d" | "30d">("today");
 
   return (
-    <div className="p-6 rounded-xl bg-[#0c0c0f] border border-[#27272a] flex flex-col gap-5 shadow-sm">
+    <div className="p-4 sm:p-6 rounded-xl bg-[#0c0c0f] border border-[#27272a] flex flex-col gap-5 shadow-sm">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 min-w-0">
           <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-[#a78bfa]" />
+            <TrendingUp className="w-4 h-4 text-[#a78bfa] shrink-0" />
             <h2 className="text-sm font-semibold tracking-tight text-[#fafafa]">
               Rendimiento de Inferencia & Volumen TC (Últimas 24h)
             </h2>
@@ -61,7 +61,7 @@ export function InferencePerformanceChart() {
 
       {/* SVG Visualization Chart */}
       <div className="w-full flex flex-col gap-2 pt-2">
-        <div className="h-44 w-full relative">
+        <div className="h-36 sm:h-44 w-full relative">
           <svg
             className="w-full h-full overflow-visible"
             preserveAspectRatio="none"
@@ -118,18 +118,22 @@ export function InferencePerformanceChart() {
         </div>
 
         {/* Bottom Time Axis */}
-        <div className="flex items-center justify-between text-[10px] font-mono text-[#71717a] pt-2">
+        <div className="flex items-center justify-between gap-1 text-[9px] sm:text-[10px] font-mono text-[#71717a] pt-2">
           <span>00:00</span>
           <span>04:00</span>
-          <span>08:00 (Pico guardia)</span>
+          <span>
+            08:00<span className="hidden sm:inline"> (Pico guardia)</span>
+          </span>
           <span>12:00</span>
-          <span>16:00 (Pico ambulatorio)</span>
+          <span>
+            16:00<span className="hidden sm:inline"> (Pico ambulatorio)</span>
+          </span>
           <span>20:00</span>
           <span className="text-[#fafafa] font-semibold">Ahora</span>
         </div>
 
         {/* Legend */}
-        <div className="flex items-center gap-5 pt-3 border-t border-[#18181b] text-xs font-mono">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-3 border-t border-[#18181b] text-xs font-mono">
           <div className="flex items-center gap-2">
             <span className="w-3 h-1 rounded bg-[#a78bfa]" />
             <span className="text-[#a1a1aa]">Estudios Recibidos/h</span>
@@ -138,7 +142,7 @@ export function InferencePerformanceChart() {
             <span className="w-3 h-1 rounded bg-[#34d399]" />
             <span className="text-[#a1a1aa]">Velocidad Inferencia (s)</span>
           </div>
-          <span className="ml-auto text-[#71717a] text-[11px]">
+          <span className="sm:ml-auto text-[#71717a] text-[11px]">
             99.8% paquetes válidos DICOM
           </span>
         </div>

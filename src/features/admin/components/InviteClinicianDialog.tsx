@@ -6,6 +6,8 @@ import {
   type InviteClinicianInput,
 } from "@/features/auth/schemas/auth.schemas";
 import { authService } from "@/features/auth/services/auth.service";
+import { adminService } from "../services/admin.service";
+import { extractApiError } from "@/lib/api/errors";
 import { toast } from "sonner";
 import {
   UserPlus,
@@ -18,11 +20,11 @@ import {
   Copy,
   AlertCircle,
 } from "lucide-react";
-import axios from "axios";
 
 interface InviteClinicianDialogProps {
   isOpen: boolean;
   onClose: () => void;
+  onInvited?: () => void;
 }
 
 interface IssuedInvitation {
@@ -31,7 +33,11 @@ interface IssuedInvitation {
   expiresAt?: string;
 }
 
-export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialogProps) {
+export function InviteClinicianDialog({
+  isOpen,
+  onClose,
+  onInvited,
+}: InviteClinicianDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const [issuedInvitation, setIssuedInvitation] = useState<IssuedInvitation | null>(null);
@@ -73,29 +79,34 @@ export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialog
       });
 
       const responseData = response.data as {
+        user_id?: string;
+        activation_token?: string;
         invitation_token?: string;
         expires_at?: string;
       } | undefined;
 
+      if (responseData?.user_id && data.role_code) {
+        try {
+          await adminService.assignUserRole(responseData.user_id, data.role_code);
+        } catch {
+          toast.warning("Cuenta invitada, pero no se pudo asignar el rol inicial automáticamente.");
+        }
+      }
+
       setIssuedInvitation({
         email: data.email,
-        token: responseData?.invitation_token,
+        token: responseData?.activation_token || responseData?.invitation_token,
         expiresAt: responseData?.expires_at,
       });
 
+      onInvited?.();
       toast.success(`Invitación emitida para ${data.email}`);
     } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        const errorDetail = err.response?.data?.error?.message;
-        const detail = err.response?.data?.detail;
-        const msg =
-          errorDetail ||
-          (typeof detail === "string" ? detail : undefined) ||
-          "Error al emitir la invitación clínica. Verifica tus permisos de administrador.";
-        setApiError(msg);
-      } else {
-        setApiError("Ocurrió un error inesperado al procesar la solicitud.");
-      }
+      const parsed = extractApiError(
+        err,
+        "Error al emitir la invitación clínica. Verifica tus permisos de administrador."
+      );
+      setApiError(parsed.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -112,25 +123,25 @@ export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialog
       role="dialog"
       aria-modal="true"
       aria-labelledby="dialog-title"
-      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-in fade-in duration-150"
     >
-      <div className="bg-[#0c0c0f] border border-[#27272a] rounded-2xl w-full max-w-lg p-6 shadow-2xl relative flex flex-col gap-5">
+      <div className="bg-[#0c0c0f] border border-[#27272a] rounded-2xl w-full max-w-lg p-5 sm:p-6 max-h-[92vh] overflow-y-auto shadow-2xl relative flex flex-col gap-5">
         {/* Close Button */}
         <button
           type="button"
           onClick={handleClose}
           aria-label="Cerrar ventana"
-          className="absolute top-5 right-5 p-1.5 rounded-lg text-[#71717a] hover:text-[#fafafa] hover:bg-[#18181b] transition-colors"
+          className="absolute top-4 right-4 sm:top-5 sm:right-5 p-1.5 rounded-lg text-[#71717a] hover:text-[#fafafa] hover:bg-[#18181b] transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a78bfa]">
+        <div className="flex items-center gap-3 pr-8">
+          <div className="w-10 h-10 rounded-xl bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a78bfa] shrink-0">
             <UserPlus className="w-5 h-5" />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0">
             <h2 id="dialog-title" className="text-base font-semibold text-[#fafafa] tracking-tight">
               Invitar Facultativo al Nodo Clínico
             </h2>
@@ -145,20 +156,20 @@ export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialog
           <div className="flex flex-col gap-4 py-2">
             <div className="p-4 rounded-xl bg-[#065f46]/20 border border-[#065f46]/40 flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-[#34d399] shrink-0 mt-0.5" />
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 min-w-0">
                 <span className="text-xs font-semibold text-[#fafafa]">
                   Invitación emitida exitosamente
                 </span>
-                <p className="text-xs text-[#a1a1aa]">
+                <p className="text-xs text-[#a1a1aa] break-words">
                   Se ha generado el token de activación para{" "}
-                  <strong className="text-[#fafafa]">{issuedInvitation.email}</strong>.
+                  <strong className="text-[#fafafa] break-all">{issuedInvitation.email}</strong>.
                 </p>
               </div>
             </div>
 
             {issuedInvitation.token && (
               <div className="p-4 rounded-xl bg-[#121215] border border-[#27272a] flex flex-col gap-2">
-                <div className="flex items-center justify-between text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
                   <span className="font-mono text-[11px] uppercase tracking-wider text-[#71717a]">
                     Token de Activación Directa
                   </span>
@@ -174,7 +185,7 @@ export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialog
                 <div className="p-2.5 rounded bg-[#09090b] border border-[#27272a] font-mono text-[11px] text-[#fafafa] break-all select-all">
                   {issuedInvitation.token}
                 </div>
-                <p className="text-[10px] text-[#71717a] font-mono">
+                <p className="text-[10px] text-[#71717a] font-mono break-all">
                   Enlace: {window.location.origin}/activate?token=...
                 </p>
               </div>
@@ -184,7 +195,7 @@ export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialog
               <button
                 type="button"
                 onClick={handleClose}
-                className="px-4 py-2 rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] font-medium text-xs transition-colors"
+                className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] font-medium text-xs transition-colors"
               >
                 Cerrar y volver al panel
               </button>
@@ -226,7 +237,7 @@ export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialog
             </div>
 
             {/* First Name & Last Name */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="invite-first-name" className="text-xs font-medium text-[#a1a1aa]">
                   Nombre
@@ -295,19 +306,19 @@ export function InviteClinicianDialog({ isOpen, onClose }: InviteClinicianDialog
             </div>
 
             {/* Footer Buttons */}
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#27272a]">
+            <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-end gap-2.5 sm:gap-3 pt-3 border-t border-[#27272a]">
               <button
                 type="button"
                 onClick={handleClose}
                 disabled={isSubmitting}
-                className="px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#27272a] text-[#a1a1aa] hover:text-[#fafafa] text-xs font-medium transition-colors"
+                className="w-full sm:w-auto px-4 py-2 rounded-lg bg-[#18181b] hover:bg-[#27272a] text-[#a1a1aa] hover:text-[#fafafa] text-xs font-medium transition-colors"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] text-xs font-semibold shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] text-xs font-semibold shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>

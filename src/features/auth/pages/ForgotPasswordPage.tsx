@@ -59,7 +59,7 @@ export function ForgotPasswordPage({ onSubmitMock }: ForgotPasswordPageProps) {
   return (
     <div className="w-full max-w-md mx-auto flex flex-col items-center">
       {/* Recovery Card Container */}
-      <div className="w-full bg-[#121215] border border-[#27272a]/70 rounded-2xl shadow-2xl shadow-black/80 p-6 sm:p-8 relative overflow-hidden backdrop-blur-xl">
+      <div className="w-full bg-[#121215] border border-[#27272a]/70 rounded-2xl shadow-2xl shadow-black/80 p-5 sm:p-8 relative overflow-hidden backdrop-blur-xl">
         {/* Subtle decorative glow */}
         <div 
           aria-hidden="true" 
@@ -82,7 +82,7 @@ export function ForgotPasswordPage({ onSubmitMock }: ForgotPasswordPageProps) {
             <span>AUTH-SRV</span>
           </div>
 
-          <h1 className="text-2xl font-bold tracking-tight text-[#fafafa]">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#fafafa]">
             Recuperar contraseña
           </h1>
           <p className="text-xs text-[#a1a1aa] max-w-xs mt-1.5 leading-relaxed">
@@ -107,7 +107,7 @@ export function ForgotPasswordPage({ onSubmitMock }: ForgotPasswordPageProps) {
                 <span className="text-xs font-semibold">Enlace de recuperación emitido</span>
               </div>
               <p className="text-xs text-[#a1a1aa] leading-relaxed">
-                Si el correo <span className="font-mono text-[#fafafa]">{submittedEmail}</span> coincide con una credencial médica activa, se ha enviado un enlace de un solo uso con validez de <strong className="text-[#fafafa]">15 minutos</strong>.
+                Si el correo <span className="font-mono text-[#fafafa] break-all">{submittedEmail}</span> coincide con una credencial médica activa, se ha enviado un enlace de un solo uso con validez de <strong className="text-[#fafafa]">15 minutos</strong>.
               </p>
             </div>
 
@@ -141,7 +141,7 @@ export function ForgotPasswordPage({ onSubmitMock }: ForgotPasswordPageProps) {
           /* Form state */
           <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
             <div className="space-y-2 text-left">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-1">
                 <label 
                   htmlFor="email" 
                   className="text-xs font-medium text-[#fafafa] tracking-wide block"
@@ -204,9 +204,9 @@ export function ForgotPasswordPage({ onSubmitMock }: ForgotPasswordPageProps) {
         )}
 
         {/* Footer inside card */}
-        <div className="mt-6 pt-4 bg-[#18181b]/50 -mx-6 -mb-6 sm:-mx-8 sm:-mb-8 px-6 py-3.5 flex items-center justify-between text-[11px] text-[#a1a1aa] border-t border-[#27272a]/40">
+        <div className="mt-6 pt-4 bg-[#18181b]/50 -mx-5 -mb-5 sm:-mx-8 sm:-mb-8 px-5 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[#a1a1aa] border-t border-[#27272a]/40">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#34d399] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#34d399] animate-pulse shrink-0" />
             <span className="font-mono text-[11px]">Nodo DICOM PACS · Conectado</span>
           </div>
           <span className="font-mono text-[10px] text-[#71717a]">TLS 1.3 / E2EE</span>

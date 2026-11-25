@@ -17,15 +17,15 @@ export function PatientStudiesPage() {
   };
 
   return (
-    <div className="flex flex-col w-full gap-8">
+    <div className="flex flex-col w-full gap-6 lg:gap-8">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
-        <div className="flex flex-col gap-1.5">
-          <div className="flex items-center gap-3">
-            <h1 className="text-xl font-semibold tracking-tight text-[#fafafa]">
+        <div className="flex flex-col gap-1.5 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <h1 className="text-lg sm:text-xl font-semibold tracking-tight text-[#fafafa]">
               Mis Estudios TC e Informes Clínicos
             </h1>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-[#18181b] border border-[#27272a] text-[#34d399]">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-wider bg-[#18181b] border border-[#27272a] text-[#34d399] shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34d399]" />
               HISTORIAL SINCRONIZADO
             </span>
@@ -39,7 +39,7 @@ export function PatientStudiesPage() {
       </div>
 
       {/* Patient Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="p-5 rounded-xl bg-[#0c0c0f] border border-[#27272a] flex items-center justify-between shadow-sm">
           <div className="flex flex-col gap-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-[#71717a]">
@@ -86,12 +86,12 @@ export function PatientStudiesPage() {
 
       {/* Studies List */}
       <div className="rounded-xl bg-[#0c0c0f] border border-[#27272a] flex flex-col overflow-hidden shadow-sm">
-        <div className="p-5 bg-[#121215]/60 border-b border-[#27272a] flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a78bfa]">
+        <div className="p-4 sm:p-5 bg-[#121215]/60 border-b border-[#27272a] flex items-center justify-between">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a78bfa] shrink-0">
               <FileText className="w-4 h-4" />
             </div>
-            <div>
+            <div className="min-w-0">
               <h2 className="text-sm font-semibold tracking-tight text-[#fafafa]">
                 Exploraciones Tomográficas de Tórax
               </h2>
@@ -104,9 +104,9 @@ export function PatientStudiesPage() {
 
         <div className="divide-y divide-[#18181b]">
           {/* Study 1 */}
-          <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#121215]/50 transition-colors">
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2.5">
+          <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#121215]/50 transition-colors">
+            <div className="flex flex-col gap-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                 <span className="font-mono text-sm font-medium text-[#a78bfa]">
                   TC-2024-8898
                 </span>
@@ -130,11 +130,11 @@ export function PatientStudiesPage() {
               </span>
             </div>
 
-            <div className="flex items-center gap-2 self-start sm:self-center">
+            <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
               <button
                 type="button"
                 onClick={() => handleDownloadReport("TC-2024-8898")}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] text-xs font-semibold shadow-sm transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#a78bfa] hover:bg-[#8b5cf6] text-[#09090b] text-xs font-semibold shadow-sm transition-colors"
               >
                 <Download className="w-4 h-4" />
                 <span>Descargar Informe (PDF)</span>
@@ -143,9 +143,9 @@ export function PatientStudiesPage() {
           </div>
 
           {/* Study 2 */}
-          <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#121215]/50 transition-colors">
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2.5">
+          <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#121215]/50 transition-colors">
+            <div className="flex flex-col gap-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                 <span className="font-mono text-sm font-medium text-[#a78bfa]">
                   TC-2024-7102
                 </span>
@@ -164,11 +164,11 @@ export function PatientStudiesPage() {
               </span>
             </div>
 
-            <div className="flex items-center gap-2 self-start sm:self-center">
+            <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
               <button
                 type="button"
                 onClick={() => handleDownloadReport("TC-2024-7102")}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#18181b] hover:bg-[#27272a] text-[#fafafa] border border-[#27272a] text-xs font-medium transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-[#18181b] hover:bg-[#27272a] text-[#fafafa] border border-[#27272a] text-xs font-medium transition-colors"
               >
                 <Download className="w-4 h-4 text-[#a1a1aa]" />
                 <span>Descargar Informe (PDF)</span>
@@ -179,8 +179,8 @@ export function PatientStudiesPage() {
       </div>
 
       {/* Security & HIPAA Notice */}
-      <div className="p-4 rounded-xl bg-[#0c0c0f] border border-[#27272a] flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-[#18181b] text-[#34d399]">
+      <div className="p-4 rounded-xl bg-[#0c0c0f] border border-[#27272a] flex items-start sm:items-center gap-3">
+        <div className="p-2 rounded-lg bg-[#18181b] text-[#34d399] shrink-0">
           <ShieldCheck className="w-5 h-5" />
         </div>
         <div className="flex flex-col">

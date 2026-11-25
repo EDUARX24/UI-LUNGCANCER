@@ -4,7 +4,7 @@ import { ShieldAlert, ArrowLeft } from "lucide-react";
 export function ForbiddenPage() {
   return (
     <div className="w-full max-w-md mx-auto flex flex-col items-center text-center py-8">
-      <div className="w-full bg-[#121215] border border-[#ef4444]/40 rounded-2xl p-8 shadow-2xl space-y-4">
+      <div className="w-full bg-[#121215] border border-[#ef4444]/40 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-4">
         <div className="w-14 h-14 mx-auto rounded-2xl bg-[#3b1111]/40 border border-[#ef4444]/50 flex items-center justify-center text-[#ef4444] shadow-lg">
           <ShieldAlert className="w-7 h-7" />
         </div>
